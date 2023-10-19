@@ -3,5 +3,4 @@ export interface PostMetadata {
 	date: string;
 	excerpt: string;
 	slug: string;
-	id: string;
 }

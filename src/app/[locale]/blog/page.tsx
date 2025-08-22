@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useLocale } from "next-intl";
 import { WPPost, WPCategory } from "@/types/wp";
 import SkeletonPost from "@/components/SkeletonPost";
 
@@ -27,6 +28,9 @@ export default function BlogPage() {
 	const [categories, setCategories] = useState<WPCategory[]>([]);
 	const [selectedCategory, setSelectedCategory] = useState<number | "all">("all");
 	const [loading, setLoading] = useState(true);
+	const [visibleCount, setVisibleCount] = useState(4); // 👈 сколько постов показываем
+
+	const locale = useLocale();
 
 	useEffect(() => {
 		Promise.all([fetchPosts(), fetchCategories()]).then(([posts, cats]) => {
@@ -45,6 +49,8 @@ export default function BlogPage() {
 			? posts
 			: posts.filter((post) => post.categories.includes(selectedCategory as number));
 
+	const visiblePosts = filteredPosts.slice(0, visibleCount); // 👈 только часть постов
+
 	return (
 		<main className="w-full max-w-4xl mx-auto py-12 px-4">
 			<h1 className="text-4xl font-bold mb-8">Блог</h1>
@@ -53,8 +59,13 @@ export default function BlogPage() {
 			{!loading && (
 				<div className="flex flex-wrap gap-2 mb-8">
 					<button
-						onClick={() => setSelectedCategory("all")}
-						className={`px-4 py-2 rounded-full ${selectedCategory === "all" ? "bg-blue-600 text-white" : "bg-gray-200"
+						onClick={() => {
+							setSelectedCategory("all");
+							setVisibleCount(4); // 👈 сбрасываем при смене категории
+						}}
+						className={`px-4 py-2 rounded-full ${selectedCategory === "all"
+								? "bg-blue-600 text-white"
+								: "bg-gray-200"
 							}`}
 					>
 						Все
@@ -62,8 +73,13 @@ export default function BlogPage() {
 					{categories.map((cat) => (
 						<button
 							key={cat.id}
-							onClick={() => setSelectedCategory(cat.id)}
-							className={`px-4 py-2 rounded-full ${selectedCategory === cat.id ? "bg-blue-600 text-white" : "bg-gray-200"
+							onClick={() => {
+								setSelectedCategory(cat.id);
+								setVisibleCount(4); // 👈 сбрасываем при смене категории
+							}}
+							className={`px-4 py-2 rounded-full ${selectedCategory === cat.id
+									? "bg-blue-600 text-white"
+									: "bg-gray-200"
 								}`}
 						>
 							{cat.name}
@@ -73,25 +89,24 @@ export default function BlogPage() {
 			)}
 
 			{/* Посты */}
-			<div className="space-y-8 grid grid-cols-2 gap-4">
+			<div className="grid grid-cols-2 gap-6">
 				{loading
-					? Array.from({ length: 6 }).map((_, i) => <SkeletonPost key={i} />) // показываем 3 скелетона
-					: filteredPosts.map((post) => {
+					? Array.from({ length: 4 }).map((_, i) => <SkeletonPost key={i} />)
+					: visiblePosts.map((post) => {
 						const image =
-							(post as any)._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? "/default.jpg";;
+							(post as any)._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
+							"/default.jpg";
 
 						return (
 							<article key={post.id} className="border-b pb-6">
-								{image && (
-									<img
-										src={image}
-										alt={post.title.rendered}
-										className="w-full h-64 object-cover rounded-lg mb-4"
-									/>
-								)}
+								<img
+									src={image}
+									alt={post.title.rendered}
+									className="w-full h-64 object-cover rounded-lg mb-4"
+								/>
 								<h2 className="text-2xl font-semibold mb-2">
 									<Link
-										href={`/blog/${post.slug}`}
+										href={`/${locale}/blog/${post.slug}`}
 										className="text-blue-600 hover:underline"
 									>
 										{post.title.rendered}
@@ -105,6 +120,18 @@ export default function BlogPage() {
 						);
 					})}
 			</div>
+
+			{/* Кнопка "Показать ещё" */}
+			{!loading && visibleCount < filteredPosts.length && (
+				<div className="flex justify-center mt-8">
+					<button
+						onClick={() => setVisibleCount((prev) => prev + 4)}
+						className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+					>
+						Показать ещё
+					</button>
+				</div>
+			)}
 		</main>
 	);
 }

@@ -5,6 +5,7 @@ import { useLocale } from "next-intl";
 import Link from "next/link";
 import { WPPost } from "@/types/wp";
 import SkeletonPost from "@/components/SkeletonPost";
+import Image from "next/image";
 
 interface Props {
 	slug: string;
@@ -88,11 +89,14 @@ export default function PostClient({ slug }: Props) {
 
 	return (
 		<main className="w-full max-w-4xl mx-auto py-12 px-4">
-			<img
-				src={image}
-				alt={post.title.rendered}
-				className="w-full h-72 object-cover rounded-lg mb-6"
-			/>
+			<div className="w-full h-72 object-cover rounded-lg mb-6 relative">
+				<Image
+					src={image}
+					alt={post.title.rendered}
+					fill
+					className="max-w-full object-cover"
+				/>
+			</div>
 			<h1 className="text-4xl font-bold mb-4">{post.title.rendered}</h1>
 			<div
 				className="prose"

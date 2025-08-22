@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 import { WPPost, WPCategory } from "@/types/wp";
 import SkeletonPost from "@/components/SkeletonPost";
+import Image from "next/image";
 
 async function fetchPosts(): Promise<WPPost[]> {
 	const res = await fetch(
@@ -64,8 +65,8 @@ export default function BlogPage() {
 							setVisibleCount(4); // 👈 сбрасываем при смене категории
 						}}
 						className={`px-4 py-2 rounded-full ${selectedCategory === "all"
-								? "bg-blue-600 text-white"
-								: "bg-gray-200"
+							? "bg-blue-600 text-white"
+							: "bg-gray-200"
 							}`}
 					>
 						Все
@@ -78,8 +79,8 @@ export default function BlogPage() {
 								setVisibleCount(4); // 👈 сбрасываем при смене категории
 							}}
 							className={`px-4 py-2 rounded-full ${selectedCategory === cat.id
-									? "bg-blue-600 text-white"
-									: "bg-gray-200"
+								? "bg-blue-600 text-white"
+								: "bg-gray-200"
 								}`}
 						>
 							{cat.name}
@@ -99,11 +100,14 @@ export default function BlogPage() {
 
 						return (
 							<article key={post.id} className="border-b pb-6">
-								<img
-									src={image}
-									alt={post.title.rendered}
-									className="w-full h-64 object-cover rounded-lg mb-4"
-								/>
+								<div className="w-full h-64 object-cover rounded-lg mb-4 relative">
+									<Image
+										src={image}
+										alt={post.title.rendered}
+										className="max-w-full object-cover"
+										fill
+									/>
+								</div>
 								<h2 className="text-2xl font-semibold mb-2">
 									<Link
 										href={`/${locale}/blog/${post.slug}`}

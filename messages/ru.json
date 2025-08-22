@@ -18,7 +18,7 @@
 	},
 	"AboutPage": {
 		"title": "О нас",
-		"description": "<p>Auch das Routing ist internationalisiert.</p><p>Wenn du die Standardsprache Englisch verwendest, siehst du <code>/about</code> in der Adressleiste des Browsers auf dieser Seite.</p><p>Wenn du die Sprache auf Deutsch änderst, wird die URL mit der Locale ergänzt (<code>/de/about</code>).</p>",
+		"description": "sssssssss",
 		"about-dog": "Каждое утро, с первыми лучами солнца, я просыпаюсь в своей уютной комнате, одетой в классический стиль. Черная кожаная мебель, деревянные стены и пол, всё это создает атмосферу элегантности и изысканности. Но самым особенным предметом в моей комнате является галстук, светлые полосы которого ярко контрастируют с моим черным мехом. Выполнив утренние гигиенические процедуры, я отправляюсь на улицу, чтобы насладиться свежим воздухом и окунуться в ритм городской суеты. Мои собратья мимодходяще оборачиваются, восхищенно уставившись на мой галстук, и я с гордостью осознаю, что привлекаю внимание не только своим выдающимся внешним видом, но и своим чувством стиля. Время от времени я захожу в изысканные модные бутики и, без сомнения, становлюсь центром внимания. Мои полоски в сочетании с изящными движениями привлекают не только восхищенные взгляды, но и заслуженные комплименты. Люди с тонким вкусом никогда не проходят мимо меня, и я стараюсь не разочаровывать их своим присутствием."
 	},
 	"Error": {
@@ -30,7 +30,8 @@
 		"description": "Bitte überprüfe die Addressleiste deines Browsers oder verwende die Navigation um zu einer bekannten Seite zu wechseln."
 	},
 	"LocaleLayout": {
-		"title": "next-intl Beispiel"
+		"title": "next-intl Beispiel",
+		"description": "dddddddddd"
 	},
 	"LocaleSwitcher": {
 		"label": "Sprache ändern",

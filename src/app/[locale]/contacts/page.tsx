@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { createTranslator } from "next-intl";
 import PageLayout from "@/components/PageLayout";
+import Form from "@/components/Form";
 
 type Params = { params: { locale: string } };
 
@@ -19,6 +20,7 @@ export default function AboutPage() {
 	return (
 		<PageLayout >
 			<p>Контент страницы «О нас»...</p>
+			<Form />
 		</PageLayout>
 	);
 }

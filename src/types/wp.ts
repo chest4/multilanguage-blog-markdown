@@ -16,6 +16,7 @@ export interface YoastHeadJson {
 	og_image?: { url: string }[];
 }
 
+
 export interface WPPost {
 	id: number;
 	slug: string;

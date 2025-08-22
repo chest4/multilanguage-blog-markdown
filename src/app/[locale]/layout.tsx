@@ -33,7 +33,8 @@ export async function generateMetadata({ params: { locale } }: Props) {
 	const t = createTranslator({ locale, messages });
 
 	return {
-		title: t('LocaleLayout.title')
+		title: t('LocaleLayout.title'),
+		description: t("LocaleLayout.description")
 	};
 }
 

@@ -17,14 +17,17 @@
     "next": "13.5.5",
     "next-intl": "^2.20.2",
     "nextjs-pagination": "^3.0.0",
+    "nodemailer": "^7.0.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-input-mask": "^2.0.4"
   },
   "devDependencies": {
     "@mdx-js/loader": "^3.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "@types/mdx": "^2.0.13",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.1",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10",

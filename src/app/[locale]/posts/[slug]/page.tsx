@@ -3,10 +3,19 @@ import Markdown from "markdown-to-jsx";
 import matter from "gray-matter";
 import getPostMetadata from "../../../../components/getPostMetadata";
 import PageLayout from '../../../../components/PageLayout';
+import RandomStates from "@/components/RandomStates";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: {
+		template: '%s | example.com',
+		default: 'Home | example.com',
+	}
+}
 
 const getPostContent = (slug: string) => {
 	const folder = "posts/";
-	const file = `${folder}${slug}.md`;
+	const file = `${folder}${slug}.mdx`;
 	const content = fs.readFileSync(file, "utf8");
 	const matterResult = matter(content);
 	return matterResult;
@@ -15,7 +24,7 @@ const getPostContent = (slug: string) => {
 export const generateStaticParams = async () => {
 	const posts = getPostMetadata();
 	return posts.map((post) => ({
-		slug: post.slug
+		slug: post.slug,
 	}));
 };
 
@@ -32,8 +41,12 @@ const PostPage = (props: any) => {
 					</Markdown>
 				</article>
 			</div>
+
+			<RandomStates />
 		</PageLayout>
 	);
 }
+
+
 
 export default PostPage;

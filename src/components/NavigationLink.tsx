@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { usePathname } from 'next-intl/client';
 import Link from 'next-intl/link';
 import { ComponentProps } from 'react';

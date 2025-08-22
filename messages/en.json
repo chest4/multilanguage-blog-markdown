@@ -1,5 +1,17 @@
 {
 	"IndexPage": {
+		"yearsOfService": {
+			"title": "Years of service",
+			"value": "34"
+		},
+		"happyClients": {
+			"title": "Happy clients",
+			"value": "1.000+"
+		},
+		"partners": {
+			"title": "Products",
+			"value": "5.000+"
+		},
 		"title": "home page",
 		"description": "This is a basic example that demonstrates the usage of <code>next-intl</code> with the Next.js App Router. Try changing the locale in the top right corner and see how the content changes.",
 		"dog": "A dog is a four–legged friend, a devoted companion and a faithful dog. Meeting us with her affectionate eyes and cheerful tail, she is able to bring joy and happiness into our lives. With the development of human civilization, the dog has become an integral part of our existence. Domesticated thousands of years ago, this breed has become not only a devoted friend, but also a reliable watchman of our homes, an assistant in hunting, in search and rescue, as well as a faithful partner in many other spheres of life."

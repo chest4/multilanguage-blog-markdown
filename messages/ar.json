@@ -1,5 +1,17 @@
 {
 	"IndexPage": {
+		"yearsOfService": {
+			"title": "Years of service",
+			"value": "34"
+		},
+		"happyClients": {
+			"title": "Happy clients",
+			"value": "1.000+"
+		},
+		"partners": {
+			"title": "Products",
+			"value": "5.000+"
+		},
 		"title": "العنوان باللغة العربية",
 		"description": "Dies ist ein Beispiel, das die Verwendung von <code>next-intl</code> mit dem Next.js App Router demonstriert. Bei Ändern der Sprache rechts oben ändert sich der Inhalt dieser Seite.",
 		"dog": "الكلب هو صديق ذو أربعة أرجل ، رفيق مخلص وكلب مخلص. لقاء لنا مع عينيها حنون وذيل البهجة ، وقالت انها قادرة على جلب الفرح والسعادة في حياتنا. مع تطور الحضارة الإنسانية ، أصبح الكلب جزءا لا يتجزأ من وجودنا. منذ آلاف السنين ، أصبح هذا الصنف ليس فقط صديقا مخلصا ، ولكن أيضا حارسا موثوقا لمنازلنا ، ومساعد في الصيد والبحث والإنقاذ ، فضلا عن شريك مخلص في العديد من مجالات الحياة الأخرى."

@@ -16,6 +16,7 @@ export default function Navigation() {
 					<li className='flex items-center'><NavigationLink href="/posts">posts</NavigationLink></li>
 					<li className='flex items-center'><NavigationLink href="/blog">blog</NavigationLink></li>
 					<li className='flex items-center'><NavigationLink href="/contacts">contacts</NavigationLink></li>
+					<li className='flex items-center'><NavigationLink href="/news">news</NavigationLink></li>
 				</ul>
 				<LocaleSwitcher />
 			</nav>

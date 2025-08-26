@@ -8,7 +8,7 @@ export default function Navigation() {
 	const t = useTranslations('Navigation');
 
 	return (
-		<div className="flex bg-black items-center">
+		<div className="flex bg-black items-center fixed top-0 w-full z-10">
 			<nav className="container max-w-3xl mx-auto flex justify-between text-white py-3 px-4">
 				<ul className='flex gap-5'>
 					<li className='flex items-center'><NavigationLink href="/">{t('home')}</NavigationLink></li>

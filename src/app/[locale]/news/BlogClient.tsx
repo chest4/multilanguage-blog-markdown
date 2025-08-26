@@ -129,7 +129,7 @@ export default function BlogClient({ initialPosts, categories }: Props) {
 									/>
 								</div>
 								<h2 className="text-2xl font-semibold mb-2">
-									<Link href={`/${locale}/news/${post.slug}`} className="text-blue-600 hover:underline">
+									<Link href={`/${locale}/news/${post.slug}`} prefetch={true} className="text-blue-600 hover:underline">
 										{post.title.rendered}
 									</Link>
 								</h2>

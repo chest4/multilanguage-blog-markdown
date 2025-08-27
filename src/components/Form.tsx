@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 
 export default function Form() {
 	const [name, setName] = useState("");
@@ -12,9 +11,8 @@ export default function Form() {
 	const [nameError, setNameError] = useState("");
 	const [phoneError, setPhoneError] = useState("");
 
-	// Функция форматирования телефона
 	const formatPhone = (value: string) => {
-		const digits = value.replace(/\D/g, "").slice(0, 11); // максимум 11 цифр
+		const digits = value.replace(/\D/g, "").slice(0, 11);
 		let formatted = "+7 ";
 		if (digits.length > 1) formatted += `(${digits.slice(1, 4)}) `;
 		if (digits.length >= 4) formatted += `${digits.slice(4, 7)}-`;
@@ -27,24 +25,19 @@ export default function Form() {
 		setPhone(formatPhone(e.target.value));
 	};
 
-	// Валидация формы
 	const validate = () => {
 		let valid = true;
 
 		if (!/^[a-zA-Zа-яА-Я\s]{2,}$/.test(name)) {
 			setNameError("Введите корректное имя (только буквы, минимум 2 символа)");
 			valid = false;
-		} else {
-			setNameError("");
-		}
+		} else setNameError("");
 
 		const digits = phone.replace(/\D/g, "");
 		if (digits.length !== 11) {
 			setPhoneError("Введите корректный телефон (11 цифр)");
 			valid = false;
-		} else {
-			setPhoneError("");
-		}
+		} else setPhoneError("");
 
 		return valid;
 	};
@@ -57,7 +50,6 @@ export default function Form() {
 		if (!validate()) return;
 
 		setLoading(true);
-
 		try {
 			const res = await fetch("http://localhost:3000/api/send-contact", {
 				method: "POST",
@@ -77,44 +69,64 @@ export default function Form() {
 		}
 	};
 
+	// Авто-скрытие блоков через 5 секунд
+	useEffect(() => {
+		if (success || error) {
+			const timer = setTimeout(() => {
+				setSuccess(false);
+				setError("");
+			}, 3000);
+
+			return () => clearTimeout(timer);
+		}
+	}, [success, error]);
+
 	return (
+		<>
+			{!success && !error ? (
+				<form onSubmit={handleSubmit} className="space-y-4">
+					<div>
+						<label className="block mb-1 font-semibold">Имя</label>
+						<input
+							type="text"
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							className="w-full border px-3 py-2 rounded"
+							required
+						/>
+						{nameError && <p className="text-red-600 mt-1">{nameError}</p>}
+					</div>
 
-		<form onSubmit={handleSubmit} className="space-y-4">
-			<div>
-				<label className="block mb-1 font-semibold">Имя</label>
-				<input
-					type="text"
-					value={name}
-					onChange={(e) => setName(e.target.value)}
-					className="w-full border px-3 py-2 rounded"
-					required
-				/>
-				{nameError && <p className="text-red-600 mt-1">{nameError}</p>}
-			</div>
+					<div>
+						<label className="block mb-1 font-semibold">Телефон</label>
+						<input
+							type="tel"
+							value={phone}
+							onChange={handlePhoneChange}
+							placeholder="+7"
+							className="w-full border px-3 py-2 rounded"
+							required
+						/>
+						{phoneError && <p className="text-red-600 mt-1">{phoneError}</p>}
+					</div>
 
-			<div>
-				<label className="block mb-1 font-semibold">Телефон</label>
-				<input
-					type="tel"
-					value={phone}
-					onChange={handlePhoneChange}
-					placeholder="+7"
-					className="w-full border px-3 py-2 rounded"
-					required
-				/>
-				{phoneError && <p className="text-red-600 mt-1">{phoneError}</p>}
-			</div>
-
-			<button
-				type="submit"
-				disabled={loading}
-				className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-			>
-				{loading ? "Отправка..." : "Отправить"}
-			</button>
-
-			{success && <p className="text-green-600 mt-2">Сообщение отправлено!</p>}
-			{error && <p className="text-red-600 mt-2">{error}</p>}
-		</form>
+					<button
+						type="submit"
+						disabled={loading}
+						className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+					>
+						{loading ? "Отправка..." : "Отправить"}
+					</button>
+				</form>
+			) : success ? (
+				<div className="flex items-center gap-4 p-6 bg-green-100 rounded-lg animate-fadeIn">
+					<p className="text-green-700 font-semibold">Форма успешно отправлена!</p>
+				</div>
+			) : error ? (
+				<div className="flex items-center gap-4 p-6 bg-red-100 rounded-lg animate-fadeIn">
+					<p className="text-red-700 font-semibold">{error}</p>
+				</div>
+			) : null}
+		</>
 	);
 }

@@ -20,6 +20,14 @@ async function fetchPosts(page: number, perPage: number, category?: number): Pro
 	return res.json();
 }
 
+// утилита для расчета времени чтения
+function getReadingTime(html: string): number {
+	const text = html.replace(/<[^>]+>/g, ""); // убираем теги
+	const words = text.trim().split(/\s+/).length;
+	const minutes = Math.ceil(words / 200); // 200 слов/мин
+	return minutes;
+}
+
 type Props = {
 	initialPosts: WPPost[];
 	categories: WPCategory[];
@@ -117,6 +125,8 @@ export default function BlogClient({ initialPosts, categories }: Props) {
 					? Array.from({ length: perPage }).map((_, i) => <SkeletonPost key={i} />)
 					: posts.map((post) => {
 						const image = (post as any)._embedded?.["wp:featuredmedia"]?.[0]?.source_url || "/default.jpg";
+						const readingTime = getReadingTime(post.content.rendered);
+
 						return (
 							<article key={post.id} className="border-b pb-6">
 								<div className="w-full h-64 relative mb-4">
@@ -133,6 +143,7 @@ export default function BlogClient({ initialPosts, categories }: Props) {
 										{post.title.rendered}
 									</Link>
 								</h2>
+								<p className="text-sm text-gray-500 mb-2">⏱ {readingTime} мин на чтение</p>
 								<div className="prose" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
 							</article>
 						);

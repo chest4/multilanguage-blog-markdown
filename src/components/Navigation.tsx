@@ -13,10 +13,9 @@ export default function Navigation() {
 				<ul className='flex gap-5'>
 					<li className='flex items-center'><NavigationLink href="/">{t('home')}</NavigationLink></li>
 					<li className='flex items-center'><NavigationLink href="/about">{t('about')}</NavigationLink></li>
-					<li className='flex items-center'><NavigationLink href="/posts">posts</NavigationLink></li>
-					<li className='flex items-center'><NavigationLink href="/blog">blog</NavigationLink></li>
+					<li className='flex items-center'><NavigationLink href="/posts">posts MD</NavigationLink></li>
 					<li className='flex items-center'><NavigationLink href="/contacts">contacts</NavigationLink></li>
-					<li className='flex items-center'><NavigationLink href="/news">news</NavigationLink></li>
+					<li className='flex items-center'><NavigationLink href="/news">news WP</NavigationLink></li>
 				</ul>
 				<LocaleSwitcher />
 			</nav>
